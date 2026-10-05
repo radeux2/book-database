@@ -17,6 +17,9 @@ class Book(Base):
 	author = Column('Author', String)
 	published_date = Column('Published', Date)
 	price = Column('Price', Integer)
+
+	def __repr__(self):
+		return f'Title: {self.title} Author: {self.author} Published: {self.published_date} Price: {self.price}'
 # create a database
 # books.db
 # create a model
