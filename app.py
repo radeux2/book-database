@@ -194,14 +194,21 @@ def app():
 					print('Book updated!')
 					time.sleep(1.5)
 				elif sub_choice == '2':
-					# delete
 					session.delete(the_book)
 					session.commit()
 					print('Book deleted!')
 					time.sleep(1.5)
 		elif choice == '4':
-			# analysis
-			pass
+			oldest_book = session.query(Book).order_by(Book.published_date).first()
+			newest_book = session.query(Book).order_by(Book.published_date.desc()).first()
+			total_books = session.query(Book).count()
+			python_books = session.query(Book).filter(Book.title.like('%Python%')).count()
+			print(f'''\n***** BOOK ANALYSIS *****
+					\rOldest Books: {oldest_book}
+					\rNewest Book: {newest_book}
+					\rTotal Books: {total_books}
+					\rNumber of Python Books: {python_books}''')
+			input('\nPress enter to return to the main menu.')
 		else:
 			print('GOODBYE')
 			app_running = False
